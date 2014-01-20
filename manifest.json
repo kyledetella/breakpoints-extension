@@ -1,0 +1,18 @@
+{
+  "manifest_version": 2,
+
+  "name": "breakpoints",
+  "version": "1.0",
+  "description": "What is your breakpoint and where did it come from?.",
+
+  "browser_action": {
+    "default_icon": "bp-ico.png"
+  },
+
+  "background": {
+    "scripts": ["event.js"],
+    "persistent": false
+  },
+
+  "permissions": ["<all_urls>"]
+}
