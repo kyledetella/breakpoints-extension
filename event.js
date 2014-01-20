@@ -4,12 +4,23 @@ function injectedMethod (tab, method, callback) {
   });
 }
 
+function getMediaQuery(width) {
+  return "Mediaquery " + width;
+}
+
 function getWidth(tab) {
   injectedMethod(tab, 'getWidth', function (response) {
-    // alert('W: ' + response.data);
-    var url = 'http://breakpoints.io?w=' + response.data;
 
-    chrome.tabs.create({ url: url });
+    if (!response || !response.data) return;
+
+    var str = getMediaQuery(response.data);
+
+    document.oncopy = function(event) {
+      event.clipboardData.setData("Text", str);
+      event.preventDefault();
+    };
+    document.execCommand("Copy");
+    document.oncopy = undefined;
 
     return true;
   });

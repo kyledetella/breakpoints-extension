@@ -14,5 +14,8 @@
     "persistent": false
   },
 
-  "permissions": ["<all_urls>"]
+  "permissions": [
+    "<all_urls>",
+    "clipboardWrite"
+  ]
 }
