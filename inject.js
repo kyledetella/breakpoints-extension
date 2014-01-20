@@ -1,11 +1,9 @@
 var injected = injected || (function () {
 
   var methods = {
-
-  };
-
-  methods.getWidth = function () {
-    return window.innerWidth;
+    getWidth: function () {
+      return window.innerWidth;
+    }
   }
 
   chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {

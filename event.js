@@ -4,8 +4,16 @@ function injectedMethod (tab, method, callback) {
   });
 }
 
-function getMediaQuery(width) {
-  return "Mediaquery " + width;
+function getMediaQuery(value, unit) {
+
+  var output = [
+    "/* Breakpoint @ " + value + unit +" */",
+    "@media only screen and (max-width: " + value + unit + ") {",
+    "  /* your code */",
+    "}"
+  ].join("\n");
+
+  return output;
 }
 
 function getWidth(tab) {
@@ -13,7 +21,7 @@ function getWidth(tab) {
 
     if (!response || !response.data) return;
 
-    var str = getMediaQuery(response.data);
+    var str = getMediaQuery(response.data, 'px');
 
     document.oncopy = function(event) {
       event.clipboardData.setData("Text", str);
@@ -21,6 +29,10 @@ function getWidth(tab) {
     };
     document.execCommand("Copy");
     document.oncopy = undefined;
+
+    chrome.browserAction.setPopup({
+      popup: 'src/copied.html'
+    });
 
     return true;
   });
